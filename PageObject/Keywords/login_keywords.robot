@@ -1,20 +1,30 @@
 *** Settings ***
-Library  SeleniumLibrary
+Library    SeleniumLibrary
 Variables  ../Locators/login_locators.py
-Resource   ../Keywords/homepage_keywords.robot
 
 *** Keywords ***
 Input Username
-    Input Text  ${LoginUsernameInputBox}  ${Username}
+    [Arguments]    ${username}
+    Input Text    ${LoginUsernameInputBox}    ${username}
 
 Enter Password
-    Input Text  ${LoginPasswordInputBox}  ${Password}
+    [Arguments]    ${password}
+    Input Text    ${LoginPasswordInputBox}    ${password}
 
 Click Login
-    Click Element  ${LoginButton}
+    Click Element    ${LoginButton}
 
 Login To CLO
-    Input Username
-    Enter Password
+    [Arguments]    ${username}    ${password}
+    Input Username    ${username}
+    Enter Password    ${password}
     Click Login
-    Verify Welcome Text is Visible
+
+Verify Welcome Text is Visible
+    Element Should Be Visible    ${WelcomeText}
+
+Verify Login Error Message
+    [Arguments]    ${expected_message}
+    Element Should Be Visible    ${ErrorMessage}    timeout=5s
+    ${actual_message}=    Get Text    ${ErrorMessage}
+    Should Be Equal    ${actual_message}    ${expected_message}

@@ -12,14 +12,15 @@ Resource          ../../PageObject/Keywords/homepage_keywords.robot
 Resource          ../../PageObject/Keywords/program_keywords.robot
 Resource          ../../PageObject/Keywords/common_keywords.robot
 Resource          ../../Resources/variables.robot
-
+Library           ../../Resources/get_data_from_gsheet.py
 
 *** Test Cases ***
 Verify Successful Create new program
     [Documentation]    This test case verifies creation of a new program
     [Tags]    Smoke
     Click Hide Popup
-    Login To CLO
+    Fetch Login Credentials From Google Sheet    ${SHEET_LOGIN}    ${ROW_LOGIN}
+    Login To CLO    ${Username}    ${Password}
     Click Create New Program
     Click Submit Button Create New Program
     Verify Create Program Successful
@@ -36,3 +37,9 @@ Setup Test
 
 Teardown Test
     Close Browser
+
+Fetch Login Credentials From Google Sheet
+    [Arguments]    ${sheet_name}    ${row}
+    ${data}=    Fetch Login Credentials From Sheet    ${SHEET_ID}    ${sheet_name}    ${row}
+    Set Test Variable    ${Username}    ${data['value 1']}
+    Set Test Variable    ${Password}    ${data['value 2']}

@@ -15,22 +15,22 @@ Test Teardown     Teardown Test
 
 *** Keywords ***
 Fetch Login Credentials From Google Sheet
-    ${data}=    Fetch Login Credentials From Sheet    ${SHEET_ID}    ${SHEET_NAME}    ${ROW}
-    Set Suite Variable    ${Username}    ${data['Username']}
-    Set Suite Variable    ${Password}    ${data['Password']}
-
+    [Arguments]    ${sheet_name}    ${row}
+    ${data}=    Fetch Login Credentials From Sheet    ${SHEET_ID}    ${sheet_name}    ${row}
+    Set Test Variable    ${Username}    ${data['value 1']}
+    Set Test Variable    ${Password}    ${data['value 2']}
 *** Test Cases ***
-Verify Successful Login to CLOManagement (Admin)
+Login With Correct Username And Password
     [Documentation]    This test case verifies login with admin account
     [Tags]    Smoke
-    Fetch Login Credentials From Google Sheet
-    Input Username
-    Enter Password
+    Fetch Login Credentials From Google Sheet    ${SHEET_LOGIN}    ${ROW_LOGIN}
+    Input Username    ${Username}
+    Enter Password    ${Password}
     Click Login
     Verify Welcome Text is Visible
 
 Verify Logout (Admin)
-    [Documentation]    Log out admin
+    [Documentation]    Logout admin
     [Tags]    Smoke
     Click Hide Popup
     Login To CLO

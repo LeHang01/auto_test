@@ -1,1 +1,14 @@
+# Bỏ file credentials nhạy cảm
 Resources/credentials.json
+
+# Bỏ folder __pycache__
+__pycache__/
+*/__pycache__/
+
+# Bỏ các file báo cáo
+log.html
+output.xml
+report.html
+
+# Bỏ ảnh screenshot tự sinh
+selenium-screenshot-*.png
