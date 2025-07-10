@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.1 (Python 3.12.7 on win32)" generated="2025-07-10T21:01:58.030748" rpa="false" schemaversion="5">
+<suite id="s1" name="Login" source="d:\auto_test_EME\Demo\TestSuite\Role_Admin\login.robot">
+<kw name="Setup Suite" type="SETUP">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-07-10T21:01:59.113612" level="INFO">==== Starting Test Suite ====</msg>
+<arg>==== Starting Test Suite ====</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-07-10T21:01:59.113612" elapsed="0.011166"/>
+</kw>
+<status status="PASS" start="2025-07-10T21:01:59.113612" elapsed="0.011166"/>
+</kw>
+<test id="s1-t1" name="Verify Successful Login to CLOManagement (Admin)" line="23">
+<kw name="Setup Test" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-07-10T21:01:59.133127" level="INFO">Opening browser 'Chrome' to base url 'https://demo-clo.minds.vn/'.</msg>
+<arg>${SITE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-07-10T21:01:59.131922" elapsed="7.986028"/>
+</kw>
+<status status="PASS" start="2025-07-10T21:01:59.131224" elapsed="7.986726"/>
+</kw>
+<kw name="Fetch Login Credentials From Google Sheet">
+<kw name="Fetch Login Credentials From Sheet" owner="get_data_from_gsheet">
+<msg time="2025-07-10T21:02:09.172321" level="INFO">${data} = {'Username': 'admin', 'Password': 'demoadmin'}</msg>
+<var>${data}</var>
+<arg>${SHEET_ID}</arg>
+<arg>${SHEET_NAME}</arg>
+<arg>${ROW}</arg>
+<status status="PASS" start="2025-07-10T21:02:07.120235" elapsed="2.052086"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-07-10T21:02:09.187951" level="INFO">${Username} = admin</msg>
+<arg>${Username}</arg>
+<arg>${data['Username']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-07-10T21:02:09.172321" elapsed="0.015630"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-07-10T21:02:09.192258" level="INFO">${Password} = demoadmin</msg>
+<arg>${Password}</arg>
+<arg>${data['Password']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-07-10T21:02:09.187951" elapsed="0.004307"/>
+</kw>
+<status status="PASS" start="2025-07-10T21:02:07.118947" elapsed="2.074305"/>
+</kw>
+<kw name="Input Username" owner="login_keywords">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-07-10T21:02:09.194626" level="INFO">Typing text 'admin' into text field 'id:id_username'.</msg>
+<arg>${LoginUsernameInputBox}</arg>
+<arg>${Username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-10T21:02:09.194626" elapsed="0.243153"/>
+</kw>
+<status status="PASS" start="2025-07-10T21:02:09.193252" elapsed="0.244527"/>
+</kw>
+<kw name="Enter Password" owner="login_keywords">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-07-10T21:02:09.440837" level="INFO">Typing text 'demoadmin' into text field 'xpath://form//input[@type='password']'.</msg>
+<arg>${LoginPasswordInputBox}</arg>
+<arg>${Password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-10T21:02:09.440037" elapsed="0.117394"/>
+</kw>
+<status status="PASS" start="2025-07-10T21:02:09.439307" elapsed="0.118124"/>
+</kw>
+<kw name="Click Login" owner="login_keywords">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-07-10T21:02:09.559261" level="INFO">Clicking element 'xpath://form//button[text()='Đăng nhập']'.</msg>
+<arg>${LoginButton}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-07-10T21:02:09.559261" elapsed="5.524014"/>
+</kw>
+<status status="PASS" start="2025-07-10T21:02:09.559261" elapsed="5.524014"/>
+</kw>
+<kw name="Verify Welcome Text is Visible" owner="homepage_keywords">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2025-07-10T21:02:15.172576" level="INFO">Element 'xpath://h1[@class='content-title']' is displayed.</msg>
+<arg>${WelcomeText}</arg>
+<arg>timeout=5</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2025-07-10T21:02:15.083275" elapsed="0.091294"/>
+</kw>
+<status status="PASS" start="2025-07-10T21:02:15.083275" elapsed="0.091641"/>
+</kw>
+<kw name="Teardown Test" type="TEARDOWN">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-07-10T21:02:15.174916" elapsed="2.792696"/>
+</kw>
+<status status="PASS" start="2025-07-10T21:02:15.174916" elapsed="2.792696"/>
+</kw>
+<doc>This test case verifies login with admin account</doc>
+<tag>Smoke</tag>
+<status status="PASS" start="2025-07-10T21:01:59.124778" elapsed="18.842834"/>
+</test>
+<kw name="Teardown Suite" type="TEARDOWN">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-07-10T21:02:17.967612" level="INFO">==== Ending Test Suite ====</msg>
+<arg>==== Ending Test Suite ====</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-07-10T21:02:17.967612" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-07-10T21:02:17.967612" elapsed="0.012231"/>
+</kw>
+<status status="PASS" start="2025-07-10T21:01:58.047801" elapsed="19.932042"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">Smoke</stat>
+</tag>
+<suite>
+<stat name="Login" id="s1" pass="1" fail="0" skip="0">Login</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
